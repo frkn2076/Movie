@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movie.API", "Movie.API\Movie.API.csproj", "{C772D24F-E0A9-4FCF-B7DD-A07CC5739E55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Movie.API", "Movie.API\Movie.API.csproj", "{C772D24F-E0A9-4FCF-B7DD-A07CC5739E55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movie.Business", "Movie.Business\Movie.Business.csproj", "{E6658CCA-5B53-48CA-BE42-32985F01256B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Movie.Business", "Movie.Business\Movie.Business.csproj", "{E6658CCA-5B53-48CA-BE42-32985F01256B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movie.DataAccess", "Movie.DataAccess\Movie.DataAccess.csproj", "{90F66672-B0E8-4A53-BDA8-5780CFF252E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Movie.DataAccess", "Movie.DataAccess\Movie.DataAccess.csproj", "{90F66672-B0E8-4A53-BDA8-5780CFF252E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
