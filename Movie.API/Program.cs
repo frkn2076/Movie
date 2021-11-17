@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Movie.Business;
-using Movie.Business.Gateway;
-using Movie.Business.Gateway.Wikipedia;
+using Movie.Business.Gateway.IMDB;
 using Movie.DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,7 +16,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDBContext>(opt => opt.UseNpgsql(builder.Configuration.GetConnectionString(nameof(AppDBContext))));
 builder.Services.AddScoped<IMovieManager, MovieManager>();
 
-builder.Services.AddHttpClient<IImdbConsumer, ImdbConsumer>(client => client.BaseAddress = new Uri(builder.Configuration["Services:IMDB"]));
+builder.Services.AddHttpClient<IImdbConsumer, ImdbConsumer>(client => client.BaseAddress = new Uri(builder.Configuration["Services:IMDB:BaseUrl"]));
 
 var app = builder.Build();
 

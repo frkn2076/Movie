@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Movie.API.Requests;
+using Movie.API.Responses;
 using Movie.Business;
-using Movie.DataAccess.Entity;
 
 namespace Movie.API.Controllers
 {
@@ -20,21 +20,40 @@ namespace Movie.API.Controllers
         }
 
         [HttpGet("search/{name}")]
-        public IActionResult SearchByName(string name)
+        public async Task<IActionResult> SearchByName(string name)
         {
-            return Ok(string.Empty);
+            var response = await _movieManager.SearcyMovieByName(name);
+            return Ok(response);
         }
 
-        [HttpPost("watchlist/{userId}")]
-        public IActionResult AddWatchList(MovieRequest request, int userId)
+        [HttpPost("watchlist")]
+        public async Task<IActionResult> AddWatchList(MovieRequest request)
         {
-            return Ok(string.Empty);
+            var movieDTO = new MovieDetailDTO()
+            {
+                UserId = request.UserId,
+                MovieId = request.Movie.Id,
+                Description = request.Movie.Description,
+                Title = request.Movie.Title
+            };
+            await _movieManager.AddMovieToWatchListOfUser(movieDTO);
+            return Ok();
         }
 
         [HttpGet("watchlist/{userId}")]
-        public IActionResult GetWatchLists(int userId)
+        public async Task<IActionResult> GetWatchLists(int userId)
         {
-            return Ok(string.Empty);
+            var watchListsDTO = await _movieManager.GetWatchListOfUser(userId);
+            var response = new WatchListResponse();
+            response.WatchLists = watchListsDTO.Select(x => new WatchListDetailResponse()
+            {
+                MovieId = x.Id,
+                Description = x.Description,
+                Title = x.Title,
+                HasWatched = x.HasWatched
+            }).ToList();
+
+            return Ok(response);
         }
 
         [HttpPut("watchlist/{userId}")]
