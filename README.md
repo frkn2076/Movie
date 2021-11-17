@@ -1,2 +1,2 @@
 # Movie
-API that integrates imdb services
+API that consumes imdb services
