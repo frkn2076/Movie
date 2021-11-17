@@ -1,10 +1,12 @@
-﻿namespace Movie.Business.Gateway
+﻿using Movie.Business.Gateway.IMDB.Models;
+
+namespace Movie.Business.Gateway.IMDB
 {
     public interface IImdbConsumer
     {
-        public void SearchByName(string movie);
-        public void GetInfoById(string id);
-        public void GetPostersById(string id);
-        public void GetDescriptionById(string id);
+        public Task<SearchResponse> SearchByName(string movie);
+        public Task<InfoResponse> GetInfoById(string id);
+        public Task<PosterResponse> GetPostersById(string id);
+        public Task<WikipediaResponse> GetDescriptionById(string id);
     }
 }
