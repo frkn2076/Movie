@@ -8,6 +8,10 @@ using Movie.API.Filters;
 using Movie.Business;
 using Movie.Business.Gateway.IMDB;
 using Movie.DataAccess;
+using Hangfire;
+using Hangfire.MemoryStorage;
+using Movie.API.Job;
+using Movie.Business.Notifier;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +44,11 @@ builder.Services.AddSwaggerGen(opt =>
     opt.EnableAnnotations();
 });
 
+builder.Services.AddHangfire(config =>
+{
+    config.UseMemoryStorage();
+});
+
 builder.Services.AddDbContext<AppDBContext>(opt => opt.UseNpgsql(builder.Configuration.GetConnectionString(nameof(AppDBContext))));
 builder.Services.AddScoped<IMovieManager, MovieManager>();
 
@@ -64,5 +73,11 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseHangfireServer();
+
+HangfireJobs.Init();
+
+Batch.Configure(builder.Services.BuildServiceProvider().GetService<IMovieManager>());
 
 app.Run();
