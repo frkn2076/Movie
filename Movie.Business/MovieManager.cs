@@ -48,7 +48,8 @@ public class MovieManager : IMovieManager
             FullTitle = infoResponse.FullTitle,
             Year = infoResponse.Year,
             Awards = infoResponse.Awards,
-            Stars = infoResponse.stars
+            Stars = infoResponse.stars,
+            Rating = infoResponse.ImDbRating
         };
         return response;
     }
@@ -137,6 +138,18 @@ public class MovieManager : IMovieManager
         await _context.SaveChangesAsync();
     }
 
+    private async Task<List<string>> GetMostRatedMovieIds(int userId)
+    {
+        var movieIds = await _context.WatchLists.AsNoTracking().Where(x => !x.HasWatched && x.UserId == userId 
+            && !string.IsNullOrWhiteSpace(x.MovieId)).Select(x => x.MovieId).ToListAsync();
+        return movieIds;
+    }
+
+    private async Task GroupMoviesByGenre(List<string> names)
+    {
+
+    }
+
 
     #region Explicit Definitions
     Task<List<MovieDTO>> IMovieManager.SearcyMovieByName(string name) => SearcyMovieByName(name);
@@ -146,5 +159,6 @@ public class MovieManager : IMovieManager
     Task IMovieManager.AddMovieToWatchListOfUser(MovieDetailDTO movie) => AddMovieToWatchListOfUser(movie);
     Task<List<WatchListDTO>> IMovieManager.GetWatchListOfUser(int userId) => GetWatchListOfUser(userId);
     Task IMovieManager.MarkMovieAsWatched(int userId, string movieId) => MarkMovieAsWatched(userId, movieId);
+    Task<List<string>> IMovieManager.GetMostRatedMovieIds(int userId) => GetMostRatedMovieIds(userId);
     #endregion
 }

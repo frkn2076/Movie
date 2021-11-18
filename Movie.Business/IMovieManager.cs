@@ -10,4 +10,5 @@ public interface IMovieManager
     public Task AddMovieToWatchListOfUser(MovieDetailDTO movie);
     public Task<List<WatchListDTO>> GetWatchListOfUser(int userId);
     public Task MarkMovieAsWatched(int userId, string movieId);
+    public Task<List<string>> GetMostRatedMovieIds(int userId);
 }
