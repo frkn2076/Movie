@@ -7,4 +7,5 @@ public class MovieInfoDTO
     public string Year { get; set; }
     public string Awards { get; set; }
     public string Stars { get; set; }
+    public string Rating { get; set; }
 }
