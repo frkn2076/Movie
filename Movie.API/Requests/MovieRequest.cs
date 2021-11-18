@@ -1,8 +1,6 @@
-﻿namespace Movie.API.Requests
+﻿namespace Movie.API.Requests;
+public class MovieRequest
 {
-    public class MovieRequest
-    {
-        public int UserId { get; set; }
-        public MovieDetailRequest Movie { get; set; }
-    }
+    public int UserId { get; set; }
+    public MovieDetailRequest Movie { get; set; }
 }

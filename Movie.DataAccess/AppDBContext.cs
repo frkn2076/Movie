@@ -2,16 +2,14 @@
 using Movie.DataAccess.Entity;
 using System.Reflection;
 
-namespace Movie.DataAccess
+namespace Movie.DataAccess;
+public class AppDBContext : DbContext
 {
-    public class AppDBContext : DbContext
-    {
-        public AppDBContext(DbContextOptions<AppDBContext> options) : base(options) { }
-        public DbSet<WatchList> WatchLists { get; set; }
+    public AppDBContext(DbContextOptions<AppDBContext> options) : base(options) { }
+    public DbSet<WatchList> WatchLists { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-        }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     }
 }

@@ -1,8 +1,6 @@
-﻿namespace Movie.Business.DTO
+﻿namespace Movie.Business.DTO;
+public class MoviePosterDTO
 {
-    public class MoviePosterDTO
-    {
-        public string Id { get; set; }
-        public string Link { get; set; }
-    }
+    public string Id { get; set; }
+    public string Link { get; set; }
 }

@@ -1,8 +1,6 @@
-﻿namespace Movie.Business.Gateway.IMDB.Models
+﻿namespace Movie.Business.Gateway.IMDB.Models;
+public class PlotResponse
 {
-    public class PlotResponse
-    {
-        public string PlainText { get; set; }
-        public string Html { get; set; }
-    }
+    public string PlainText { get; set; }
+    public string Html { get; set; }
 }

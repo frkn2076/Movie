@@ -2,26 +2,24 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Movie.DataAccess.Entity;
 
-namespace Movie.DataAccess.Config
+namespace Movie.DataAccess.Config;
+public class WatchListConfiguration : IEntityTypeConfiguration<WatchList>
 {
-    public class WatchListConfiguration : IEntityTypeConfiguration<WatchList>
+    public void Configure(EntityTypeBuilder<WatchList> builder)
     {
-        public void Configure(EntityTypeBuilder<WatchList> builder)
-        {
-            builder.HasKey(e => e.Id);
+        builder.HasKey(e => e.Id);
 
-            builder.Property(e => e.UserId)
-                .IsRequired();
+        builder.Property(e => e.UserId)
+            .IsRequired();
 
-            builder.Property(e => e.MovieId)
-                .IsRequired();
+        builder.Property(e => e.MovieId)
+            .IsRequired();
 
-            builder.Property(e => e.Description);
+        builder.Property(e => e.Description);
 
-            builder.Property(e => e.Title);
+        builder.Property(e => e.Title);
 
-            builder.Property(e => e.HasWatched)
-                .IsRequired();
-        }
+        builder.Property(e => e.HasWatched)
+            .IsRequired();
     }
 }
