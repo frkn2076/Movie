@@ -65,12 +65,12 @@ public class FilmController : ControllerBase
     }
 
     [HttpPost("groupfilms")]
-    [ProducesResponseType(typeof(List<MovieGroupResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(List<MovieGenreResponse>), StatusCodes.Status200OK)]
     [SwaggerOperation(Summary = "Group movies", Description = "Group the movies sent on request by genre")]
     public async Task<IActionResult> GroupMovies(MovieCollectionRequest request)
     {
-        
-
+        var genresDTO = await _movieManager.GroupMoviesByGenre(request.MovieNames);
+        var response = genresDTO.Adapt<List<MovieGenreResponse>>();
         return Ok();
     }
 }

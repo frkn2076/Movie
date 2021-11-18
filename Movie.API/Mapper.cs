@@ -1,7 +1,6 @@
 ﻿using Mapster;
 using Movie.API.Requests;
 using Movie.API.Responses;
-using Movie.Business;
 using Movie.Business.DTO;
 
 namespace Movie.API;
@@ -19,5 +18,7 @@ public class Mapper
 
         TypeAdapterConfig<WatchListDTO, WatchListDetailResponse>.NewConfig()
         .Map(dest => dest.MovieId, src => src.Id);
+
+        TypeAdapterConfig<MovieGenreDTO, MovieGenreResponse>.NewConfig();
     }
 }

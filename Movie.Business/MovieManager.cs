@@ -49,7 +49,8 @@ public class MovieManager : IMovieManager
             Year = infoResponse.Year,
             Awards = infoResponse.Awards,
             Stars = infoResponse.stars,
-            Rating = infoResponse.ImDbRating
+            Rating = infoResponse.ImDbRating,
+            Genres = infoResponse.GenreList.Select(x => x.Key).ToList()
         };
         return response;
     }
@@ -145,9 +146,21 @@ public class MovieManager : IMovieManager
         return movieIds;
     }
 
-    private async Task GroupMoviesByGenre(List<string> names)
+    private async Task<List<MovieGenreDTO>> GroupMoviesByGenre(List<string> names)
     {
+        var movieDetailTasks = names.Select(x => SearcyMovieByName(x)).ToList();
+        var movieDetails = await Task.WhenAll(movieDetailTasks);
+        var movieIds = movieDetails.Where(x => x != null).SelectMany(x => x.Select(a => a.Id)).ToList();
 
+        var movieInfoTasks = movieIds.Select(x => GetInfoByMovieId(x)).ToList();
+        var movieInfos = await Task.WhenAll(movieInfoTasks);
+        var response = movieInfos.SelectMany(x => x.Genres).GroupBy(x => x).Select(x => new MovieGenreDTO()
+        {
+            Genre = x.Key,
+            Count = x.Count()
+        }).ToList();
+
+        return response;
     }
 
 
@@ -160,5 +173,6 @@ public class MovieManager : IMovieManager
     Task<List<WatchListDTO>> IMovieManager.GetWatchListOfUser(int userId) => GetWatchListOfUser(userId);
     Task IMovieManager.MarkMovieAsWatched(int userId, string movieId) => MarkMovieAsWatched(userId, movieId);
     Task<List<string>> IMovieManager.GetMostRatedMovieIds(int userId) => GetMostRatedMovieIds(userId);
+    Task<List<MovieGenreDTO>> IMovieManager.GroupMoviesByGenre(List<string> names) => GroupMoviesByGenre(names);
     #endregion
 }

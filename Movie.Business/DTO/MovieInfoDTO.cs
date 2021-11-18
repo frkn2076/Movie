@@ -8,4 +8,5 @@ public class MovieInfoDTO
     public string Awards { get; set; }
     public string Stars { get; set; }
     public string Rating { get; set; }
+    public List<string> Genres { get; set; }
 }

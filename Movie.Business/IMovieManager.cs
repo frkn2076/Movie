@@ -11,4 +11,5 @@ public interface IMovieManager
     public Task<List<WatchListDTO>> GetWatchListOfUser(int userId);
     public Task MarkMovieAsWatched(int userId, string movieId);
     public Task<List<string>> GetMostRatedMovieIds(int userId);
+    public Task<List<MovieGenreDTO>> GroupMoviesByGenre(List<string> names);
 }
