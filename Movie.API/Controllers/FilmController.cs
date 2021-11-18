@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Movie.API.Requests;
 using Movie.API.Responses;
 using Movie.Business;
+using Movie.Business.DTO;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Movie.API.Controllers;
@@ -64,10 +65,12 @@ public class FilmController : ControllerBase
     }
 
     [HttpPost("groupfilms")]
-    [ProducesResponseType(typeof(WatchListResponse), StatusCodes.Status200OK)]
-    [SwaggerOperation(Summary = "Group films", Description = "Group the films sent on request by genre")]
-    public async Task<IActionResult> GroupFilms(int userId)
+    [ProducesResponseType(typeof(List<MovieGroupResponse>), StatusCodes.Status200OK)]
+    [SwaggerOperation(Summary = "Group movies", Description = "Group the movies sent on request by genre")]
+    public async Task<IActionResult> GroupMovies(MovieCollectionRequest request)
     {
         
+
+        return Ok();
     }
 }
