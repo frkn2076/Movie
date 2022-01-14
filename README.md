@@ -11,7 +11,7 @@
 
 ## Steps
 * **git clone https://github.com/frkn2076/Movie**
-* **docker run --name postgre-instance -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=12345 -d postgres:13-alpine**
+* **docker run --name postgre-instance -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -d postgres:13-alpine**
 * **Add-Migration InitialCreate**
 * **Update-Database**
 * **run project**
